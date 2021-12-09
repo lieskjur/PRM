@@ -2,18 +2,18 @@
 DEFDAT  Init PUBLIC
 DECL POS P1={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 6} ; pozice nad kostkou v zasobniku (meni se)
 DECL POS P2={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 6} ; pozice bezpecna mezi zasobnikem a pracovni plochou (meni se z souradnice)
-DECL POS P1={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 6} ; pozice nad kostkou v zasobniku (meni se)
+DECL POS P3={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0,S 6} ; pozice nad kostkou v zasobniku (meni se)
 
 DECL INT leg_x_base = 0 ; 
 DECL INT leg_y_base = 0 ; 
 DECL INT stalk = 0 ; 
 
 DECL REAL safe = 0 ; 
-DECL REAL p2_safe = 0 ; 
+DECL REAL very_safe = 0 ; 
 DECL REAL x_pitch = 0 ;
 DECL REAL y_pitch = 0 ;
 DECL REAL z_pitch = 0 ;
 DECL REAL x_base = 0 ;
 DECL REAL y_base = 0 ;
-DECL REAL z_last = 0 ;
+DECL REAL z_var = 0 ;
 ENDDAT
