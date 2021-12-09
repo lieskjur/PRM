@@ -14,6 +14,7 @@ BAS(#vel_cp, 1); rychlost
 ;--------------------------------
 ; parametricke vstupy:
 ;--------------------------------
+
 ; stavime kytku v pozicich:
 leg_x_base = 10
 leg_y_base = 10
@@ -24,6 +25,7 @@ stalk = 3
 ;--------------------------------
 ; konstanty:
 ;--------------------------------
+
 ; odstup:
 safe = 50
 very_safe = 100
@@ -36,44 +38,46 @@ z_pitch = 19.1
 ;--------------------------------
 ; inicializace
 ;--------------------------------
-; prepocet na milimetry
+
+; prepocet baze na milimetry
 x_base = leg_x_base * x_pitch
 y_base = leg_y_base * y_pitch
 
-; parametr vysky kam je aktualne postavena kytka
-z_last = safe
-
-; inicializace bezpecne pozice
+; xy bezpecne pozice
 P2.X = x_base
 P2.Y = y_base + very_safe
-P2.Z = z_last
+
+; z souradnice nad zasobnikem
+P1.Z = safe
+
+; z souradnice nad prvni kostkou
+P3.Z = safe
 
 PTP XHOME
 
 ;--------------------------------
 ; zakladna
 ;--------------------------------
+
 P1.X = 13 * x_pitch
 P1.Y = 12 * y_pitch
-P1.Z = safe
 
 P3.X = x_base
 P3.Y = y_base
-P3.Z = z_last
 
 BuildStep()
 
 ;--------------------------------
 ; stonek
 ;--------------------------------
+
 IF stalk >= 1 THEN
 	P1.X = 13 * x_pitch
 	P1.Y = 16 * y_pitch
-	P1.Z = safe
 
 	P3.X = x_base
 	P3.Y = y_base
-	P3.Z = z_last + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -81,11 +85,10 @@ ENDIF
 IF stalk >= 2 THEN
 	P1.X = 11 * x_pitch
 	P1.Y = 16 * y_pitch
-	P1.Z = safe
 
 	P3.X = x_base
 	P3.Y = y_base
-	P3.Z = z_last + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -93,11 +96,10 @@ ENDIF
 IF stalk >= 3 THEN
 	P1.X = 8 * x_pitch
 	P1.Y = 16 * y_pitch
-	P1.Z = safe
 
 	P3.X = x_base
 	P3.Y = y_base
-	P3.Z = z_last + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -105,11 +107,10 @@ ENDIF
 IF stalk >= 4 THEN
 	P1.X = 6 * x_pitch
 	P1.Y = 16 * y_pitch
-	P1.Z = safe
 
 	P3.X = x_base
 	P3.Y = y_base
-	P3.Z = z_last + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -117,36 +118,32 @@ ENDIF
 ;--------------------------------
 ; kvet
 ;--------------------------------
+
 P1.X = 13 * x_pitch
 P1.Y = 15 * y_pitch
-P1.Z = safe
 
 P3.X = x_base
 P3.Y = y_base
-P3.Z = z_last + z_pitch
+P3.Z = P3.Z + z_pitch
 
 BuildStep()
 
 P1.X = 13 * x_pitch
 P1.Y = 17 * y_pitch
-P1.Z = safe
 
 P3.X = x_base + 1 * x_pitch
 P3.Y = y_base
-P3.Z = z_last + z_pitch
+P3.Z = P3.Z + z_pitch
 
 BuildStep()
 
 P1.X = 13 * x_pitch
 P1.Y = 17 * y_pitch
-P1.Z = safe
 
 P3.X = x_base - 1 * x_pitch
 P3.Y = y_base
-P3.Z = z_last
 
 BuildStep()
-
 
 END
 
@@ -167,7 +164,6 @@ LIN_REL {Z -safe}
 OpenGrip()
 LIN_REL {Z safe}
 PTP P2
-z_last = P3.Z
 END
 
 DEF OpenGrip ( )
