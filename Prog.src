@@ -26,7 +26,7 @@ stalk = 3
 ;--------------------------------
 ; odstup:
 safe = 50
-p2_safe = 100
+very_safe = 100
 
 ; roztece
 x_pitch = 16
@@ -42,6 +42,11 @@ y_base = leg_y_base * y_pitch
 
 ; parametr vysky kam je aktualne postavena kytka
 z_last = safe
+
+; inicializace bezpecne pozice
+P2.X = x_base
+P2.Y = y_base + very_safe
+P2.Z = z_last
 
 PTP XHOME
 
@@ -150,8 +155,7 @@ END
 ;--------------------------------
 
 DEF BuildStep ( )
-P2.Z = z_last + p2_safe
-PTP P2
+P2.Z = P3.Z
 PTP P1
 OpenGrip()
 LIN_REL {Z -safe}
@@ -163,6 +167,7 @@ LIN_REL {Z -safe}
 OpenGrip()
 LIN_REL {Z safe}
 PTP P2
+z_last = P3.Z
 END
 
 DEF OpenGrip ( )
