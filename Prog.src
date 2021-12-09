@@ -40,13 +40,13 @@ z_pitch = 19.1
 x_base = leg_x_base * x_pitch
 y_base = leg_y_base * y_pitch
 
-; parametr vysky kam je aktualne postavena kytka
-z_var = safe
+; bezpecna vyska nad dalsi kostkou
+P3.Z = safe
 
 ; inicializace bezpecne pozice
 P2.X = x_base
 P2.Y = y_base + very_safe
-P2.Z = z_var
+P2.Z = P3.Z
 
 ; bezpecna vyska nad zasobnikem
 P1.Z = safe
@@ -63,8 +63,6 @@ P1.Y = 12 * y_pitch
 P3.X = x_base
 P3.Y = y_base
 
-z_var = z_var
-
 BuildStep()
 
 ;--------------------------------
@@ -77,7 +75,7 @@ IF stalk >= 1 THEN
 
 	P3.X = x_base
 	P3.Y = y_base
-	z_var = z_var + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -88,7 +86,7 @@ IF stalk >= 2 THEN
 
 	P3.X = x_base
 	P3.Y = y_base
-	z_var = z_var + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -99,7 +97,7 @@ IF stalk >= 3 THEN
 
 	P3.X = x_base
 	P3.Y = y_base
-	z_var = z_var + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -110,7 +108,7 @@ IF stalk >= 4 THEN
 
 	P3.X = x_base
 	P3.Y = y_base
-	z_var = z_var + z_pitch
+	P3.Z = P3.Z + z_pitch
 
 	BuildStep()
 ENDIF
@@ -124,8 +122,7 @@ P1.Y = 15 * y_pitch
 
 P3.X = x_base
 P3.Y = y_base
-
-z_var = z_var + z_pitch
+P3.Z = P3.Z + z_pitch
 
 BuildStep()
 
@@ -134,8 +131,7 @@ P1.Y = 17 * y_pitch
 
 P3.X = x_base + 1 * x_pitch
 P3.Y = y_base
-
-z_var = z_var + z_pitch
+P3.Z = P3.Z + z_pitch
 
 BuildStep()
 
@@ -154,8 +150,7 @@ END
 ;--------------------------------
 
 DEF BuildStep ( )
-P2.Z = z_var
-P3.Z = z_var
+P2.Z = P3.Z
 PTP P1
 OpenGrip()
 LIN_REL {Z -safe}
